@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body,ul,li,a,p,span,dl,dt,dd{margin: 0;padding: 0;list-style: none;
+			text-decoration: none;}
+		#food{width:500px;height: 500px;position: relative;margin: 0 auto;}
+		ul li{width: 150px;height: 150px;border: 1px solid #000; float: left;
+			  text-align: center;
+			}
+		ul li img{width: 120px;height: 120px; transform: scale(0.9);}
+		#food ul li dd{text-align: center;line-height: 20px;font: 14px/22px '宋体';}
+		#food ul li.nine{position: absolute;left: 152px;top: 155px;}
+		#food ul li:nth-child(4){position:absolute;top:155px;left: 304px;}
+		#food ul li:nth-child(5){position:absolute;top:310px;left: 304px;}
+		#food ul li:nth-child(6){position:absolute;top:310px;left:152px;}
+		#food ul li:nth-child(7){position:absolute;top:310px;left: 0px;}
+		#food ul li:nth-child(8){position:absolute;top:155px;left:0px;}
+		#food #close{width: 150px;height: 150px;position: absolute;top:155px;left:153px ; 
+					 background: rgba(0, 0, 255, 0.4);z-index: 9;display: none;}
+	</style>
+</head>
+<body>
+	<h1>选中谁全随缘</h1>
+	<div id="food">
+		<!-- <div id="close"></div> -->
+		<ul>
+				<li>
+					<dl>
+						<dt><img src="images/1.jpg" /></dt>
+						<dd>1号</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt><img src="images/2.jpg" /></dt>
+						<dd>2号</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt><img src="images/3.jpg" /></dt>
+						<dd>3号</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt><img src="images/4.jpg" /></dt>
+						<dd>4号</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt><img src="images/8.jpg" /></dt>
+						<dd>5号</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt><img src="images/5.jpg" /></dt>
+						<dd>6号</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt><img src="images/6.jpg" /></dt>
+						<dd>7号</dd>
+					</dl>
+				</li>
+				<li>
+					<dl>
+						<dt><img src="images/7.jpg" /></dt>
+						<dd>8号</dd>
+					</dl>
+				</li>
+				<li class="nine">
+					<dl>
+						<dt id="btn">
+							<img src="images/zhuan.jpg" id="pic"/>
+						</dt>
+						<dd>点我</dd>
+					</dl>
+				</li>
+			</ul>
+	</div>		
+	
+	<script>
+		var oLi=document.getElementsByTagName('li');
+		var oClose=document.getElementById('close');
+		var oBtn=document.getElementById('btn');
+		var oPic=document.getElementById('pic');
+		var num=i=t=0;//设置计数器
+		oBtn.onclick=function(){
+			oPic.style.transform='scale(0.7)';
+			oPic.style.transition='1s';
+			view();
+		
+		}
+		function view(){
+			 num=parseInt(Math.random()*10)+17;//确定顺时针循环次数(固定)
+			 console.log('固定'+num);
+			 //确定循环次数（递归次数）
+			 if(i<num){
+				 i++;//每循环完一个li的i+1;
+				 setTimeout(view,200);
+				 console.log('动态'+i);//测i的次数
+			 }
+			 else{
+				i=0;//为下一次抽奖做准备
+				oPic.style.transform='scale(0.9)';
+				oPic.style.transition='1s';
+			 }
+			 if(t<oLi.length-1){
+				 for(var j=0;j<oLi.length-1;j++){
+				oLi[j].style.border='1px solid #000';
+				oLi[j].style.background='#fff';
+				 }
+				 //t:顺时针循环每个li的下标
+				oLi[t].style.border='1px solid #f00';
+				oLi[t].style.background='rgba(0,0,255,0.4)';
+				t++;
+			 }
+			 else{
+				 t=0;
+			 }
+		}
+	</script>
+</body>
+</html>
