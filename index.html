@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #kuai{width: 200px;height: 200px;background:#000;position: absolute;}
+    </style>
+</head>
+<body>
+    <div id="kuai"></div>
+    <script>
+        var kuai=document.getElementById('kuai');
+        kuai.onmousedown=function(b){
+            var e=b || event;
+            //块的初始位置
+            var x0=this.offsetLeft;
+            var y0=this.offsetTop;
+            //鼠标的初始位置
+            var x1=e.clientX;
+            var y1=e.clientY;
+        document.onmousemove=function(b){
+            var e=b || event;
+            //鼠标的终点位置
+            var x2=e.clientX;
+            var y2=e.clientY;
+            //块可移动的位置
+            var x3=(x2-x1)+x0;
+            var y3=(y2-y1)+y0;
+            //定义块自身的宽高，为下面算可活动区域做准备
+            var owidth=kuai.offsetWidth;
+            var oheight=kuai.offsetHeight;
+            //块在x轴和y轴上可活动的最大区域
+            var x4=document.documentElement.clientWidth-owidth || document.body.clientWidth-owidth;
+            var y4=document.documentElement.clientHeight-oheight || document.body.clientHeight-oheight;
+            //offsetWidth和offsetHeight指元素自身的宽度和高度
+            //视区域(浏览器)的宽度和高度 clientWidth和clientHeight; 
+             //块左边和上边不出界
+            if(x3<50){x3=0;}
+            if(y3<50){y3=0;}
+            //下边和右边不出界
+            if(x3+50>x4){x3=x4;}
+            if(y3+50>y4){y3=y4;}
+            //为块设置css样式，使块随着鼠标移动
+            kuai.style.top=y3+'px';
+            kuai.style.left=x3+'px';
+        }
+        }
+    </script>
+</body>
+</html>
