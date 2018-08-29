@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+   <div id="box">
+       <ul id="txt">
+           <li class="on">热播</li>
+           <li>电影</li>
+           <li>动漫</li>
+           <li>综艺</li>
+       </ul>
+       <ul id="pic">
+           <li class="photo"><img src="images/1-small.jpg"/>
+            <span>热门看点</span>
+          </li>
+           <li><img src="images/2-small.jpg"/>
+            <span>经典电影</span>
+         </li>
+           <li><img src="images/3-small.jpg"/>
+            <span>最新动漫</span>
+         </li>
+           <li><img src="images/4-small.jpg"/>
+            <span>搞笑综艺</span>
+         </li>
+       </ul>
+       <div id="left">&lt;</div>
+       <div id="right">&gt;</div>
+   </div>
+   <script>
+    var oTxt=document.getElementById('txt');
+    var oPic=document.getElementById('pic');
+    var oLi=oTxt.getElementsByTagName('li');
+    var oLis=oPic.getElementsByTagName('li');
+    var oImgs=document.getElementsByTagName('img');
+    var oLeft=document.getElementById('left');
+    var oRight=document.getElementById('right');
+    var w=0;
+    var timer=null;
+    for(var i=0;i<oLi.length;i++){
+            (function(index) {
+                oLi[index].onmouseover=function() {
+                    for (var j=0;j<oLi.length; j++) {
+                        for(var n=0;n<oImgs.length;n++){
+                         oLis[n].className='';
+        }
+                         oLis[index].className='photo'; 
+
+                    oLi[j].className='';  
+                }
+                    oLi[index].className='on';
+
+                    }
+            })(i)
+    }
+    function play(){
+        for(var n=0;n<oImgs.length;n++){
+            oLis[n].className='';
+        }
+            oLis[w].className='photo';
+            w++;
+            if(w == oImgs.length) {w = 0;}
+    }
+    timer=setInterval(play,1500);
+    oPic.onmouseover=function () {
+        clearInterval(timer);
+    }
+    oPic.onmouseout=function () {
+        timer=setInterval(play,1500);
+    }
+    oLeft.onclick = oRight.onclick=function(){
+        if(this==oLeft){
+            w--;
+            if(w==-1){w=oLis.length-1;}
+        }
+        else{w++;
+            if(w==oLis.length){w=0;}
+        }
+        for(var n=0;n<oImgs.length;n++){
+            oLis[n].className='';
+        }
+            oLis[w].className='photo';
+    }
+    
+</script>
+</body>
+</html>
